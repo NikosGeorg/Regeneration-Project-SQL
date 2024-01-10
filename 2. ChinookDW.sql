@@ -15,7 +15,6 @@ GO
 DROP TABLE IF EXISTS FactSales;
 DROP TABLE IF EXISTS DimCustomers;
 DROP TABLE IF EXISTS DimTracks;
-DROP TABLE IF EXISTS DimPlaylists;
 
 --1. Create FACT table for FactSales
 CREATE TABLE FactSales(
@@ -53,19 +52,6 @@ CREATE TABLE DimTracks(
 	AlbumTitle NVARCHAR(160) NOT NULL,
 	ArtistName NVARCHAR(120) NULL,
 	GenreName NVARCHAR(120)  NULL,
-	RowIsCurrent INT DEFAULT 1 NOT NULL,
-    RowStartDate DATE DEFAULT '1899-12-31' NOT NULL,
-    RowEndDate DATE DEFAULT '9999-12-31' NOT NULL,
-    RowChangeReason VARCHAR(200) NULL
-);
-
---4. Create DIMENSION table for DimPlaylists
-CREATE TABLE DimPlaylists(
-	PlaylistKey INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
-	PlaylistId INT NOT NULL,
-	TrackId INT NOT NULL,
-	PlaylistName NVARCHAR(120) NULL,
-	--TrackName VARCHAR(40) NOT NULL, -- Maybe needs this for the Dashboards
 	RowIsCurrent INT DEFAULT 1 NOT NULL,
     RowStartDate DATE DEFAULT '1899-12-31' NOT NULL,
     RowEndDate DATE DEFAULT '9999-12-31' NOT NULL,

@@ -8,8 +8,3 @@ ALTER TABLE FactSales ADD  constraint [FactSalesDimCustomers]  FOREIGN KEY (Cust
 
 ALTER TABLE FactSales ADD  constraint [FactSalesDimTracks] FOREIGN KEY (TrackKey)
     REFERENCES DimTracks (TrackKey);
-
---ALTER TABLE FactSales ADD constraint [FactSalesDimPlaylists] FOREIGN KEY (PlaylistKey)
---    REFERENCES DimPlaylists(PlaylistKey);
-
-

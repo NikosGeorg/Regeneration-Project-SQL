@@ -15,8 +15,6 @@ GO
 DROP TABLE IF EXISTS ChinookStaging.dbo.Sales;
 DROP TABLE IF EXISTS ChinookStaging.dbo.Customers;
 DROP TABLE IF EXISTS ChinookStaging.dbo.Tracks;
-DROP TABLE IF EXISTS ChinookStaging.dbo.Playlists;
-
 
 --1. Creates Staging Sales
 --  Get data FROM Invoice, InvoiceLine
@@ -47,8 +45,8 @@ ON c.SupportRepId = e.EmployeeId
 
 
 --3. Create Staging Tracks
---  Get data FROM Track, Album, Artist, Genre \*Maybe needs PlaylistTrack
---  Track: TrackId, Name, Composer, Milliseconds \*Maybe needs PlaylistId
+--  Get data FROM Track, Album, Artist, Genre
+--  Track: TrackId, Name, Composer, Milliseconds
 --  Album: Title
 --  Artist: Name
 --  Genre: Name
@@ -67,19 +65,6 @@ JOIN Chinook.[dbo].Artist ar
 JOIN Chinook.[dbo].Genre g
 	ON t.GenreId = g.GenreId
 
-
---4  Create Staging Playlists
---  Get data FROM PlaylistTrack, Playlist
---  PlaylistTrack: PlaylistId, TrackId
---  Playlist: Name
-
-SELECT  pt.PlaylistId, pt.TrackId, p.Name as PlaylistName
-INTO ChinookStaging.dbo.Playlists
-FROM Chinook.[dbo].PlaylistTrack pt
-JOIN Chinook.[dbo].Playlist p
-    ON pt.PlaylistId = p.PlaylistId
-
-
---5 Get date dimension
+--4 Get date dimension
 
 SELECT MIN(InvoiceDate) minDate, MAX(InvoiceDate) maxDate FROM Sales

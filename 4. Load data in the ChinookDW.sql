@@ -4,7 +4,6 @@ USE ChinookDW
 DELETE FROM FactSales;
 DELETE FROM DimCustomers;
 DELETE FROM DimTracks;
-DELETE FROM DimPlaylists;
 
 --1.  Insert data into Dimension table DimCustomers
 INSERT INTO DimCustomers(
@@ -20,9 +19,9 @@ INSERT INTO DimCustomers(
 SELECT
 	CustomerID,
 	[CustomerFirstName] + ' ' + [CustomerLastName],
-	CustomerCompany,--ISNULL([CustomerCompany],'N/A'),
+	CustomerCompany,
 	CustomerCountry,
-	CustomerState,--ISNULL(CustomerState,'n/a'),
+	CustomerState,
 	CustomerCity,
 	COALESCE(CustomerPostalCode,'n/a'),
 	[EmployeeFirstName] + ' ' + [EmployeeLastName]
@@ -41,26 +40,14 @@ INSERT INTO DimTracks(
 SELECT
 	TrackId,
 	TrackName,
-	TrackComposer,--ISNULL([TrackComposer], 'N/A'),
+	TrackComposer,
 	TrackMilliSec,
 	AlbumTitle,
 	ArtistName,
 	GenreName
 FROM ChinookStaging.dbo.Tracks
 
---3.  Insert data into Dimension table DimPlaylists
-INSERT INTO DimPlaylists(
-	PlaylistId,
-	TrackId,
-	PlaylistName
-)
-SELECT
-	PlaylistId,
-	TrackId,
-	PlaylistName
-FROM ChinookStaging.dbo.Playlists
-
---4.  Insert data into Fact table FactSales
+--3.  Insert data into Fact table FactSales
 INSERT INTO FactSales(
 	TrackKey,
 	CustomerKey,
