@@ -66,7 +66,13 @@ VALUES(
 '60',
 '2013-12-23',
 '1.98'
-)
+),
+(
+'414',
+'1',
+'2013-12-23',
+'0.99'
+);
 
 --select * from [dbo].[InvoiceLine]
 
@@ -80,7 +86,8 @@ INSERT INTO [dbo].[InvoiceLine](
 )
 VALUES
 (2241, 413, 1, 0.99, 1),
-(2242, 413, 2, 0.99, 1);
+(2242, 413, 2, 0.99, 1),
+(2243, 414, 1, 0.99, 1);
 
 -- Check results
 select * from [dbo].[Customer]
